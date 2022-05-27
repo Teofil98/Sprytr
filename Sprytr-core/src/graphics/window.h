@@ -7,11 +7,19 @@ namespace sprytr {
     class Sprytr;
     namespace graphics {
         
+        typedef struct color {
+            float red{ 0.0f };
+            float green{ 0.0f };
+            float blue{ 0.0f };
+            float alpha{ 1.0f };
+        }color;
+
         class Window {
             
         private: 
             const char* m_title;
             GLFWwindow* m_window;
+            color m_clear_color;
             
         private:
             void init(int width, int height);
@@ -25,7 +33,7 @@ namespace sprytr {
             void update() const;
             void get_size(int& width, int& height) const;
             void make_current() const;
-            void set_clear_color(float x, float y, float z, float a) const;
+            void set_clear_color(float x, float y, float z, float a);
             void clear() const;
         };
     }

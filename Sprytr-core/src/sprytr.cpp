@@ -83,21 +83,22 @@ namespace sprytr
         return true;
     }
 
-    void Sprytr::clear_curr_window(float red, float green, float blue, float alpha) const
+    void Sprytr::set_clear_color(int window_id, float red, float green, float blue, float alpha)
     {
-        m_windows[m_current_window].set_clear_color(red, green, blue, alpha);
-        m_windows[m_current_window].clear();
+        m_windows[window_id].set_clear_color(red, green, blue, alpha);
+        //m_windows[window_id].clear();
     }
 
+    //TODO: See if I can remove this function as I now have the start() function
     void Sprytr::update_windows()
     {
-        for (graphics::Window& window : m_windows)
+        for (auto& window : m_windows)
             window.update();
 
         glfwPollEvents();
     }
 
-    void Sprytr::on_update()
+    void Sprytr::on_update(double delta_time)
     {
         std::cerr << "Error: on_update function not overriden!" << std::endl;
         exit(-1);
@@ -112,6 +113,39 @@ namespace sprytr
     {
         on_create();
 
+        //TODO: See what I want to do in case no windows were created
+        //......
+
+        double delta_time;
+        double last_time = glfwGetTime();
+        double current_time;
+
+        while (!any_window_should_close())
+        {
+            //compute time elpased since last frame
+            current_time = glfwGetTime();
+            delta_time = current_time - last_time;
+            last_time = current_time;
+
+            //TODO: See how to handle the main render loop
+            on_update(delta_time);
+
+            for (auto& window : m_windows)
+            {
+                window.make_current();
+                window.clear();
+
+                //TODO: Render shit
+                //......
+
+                //TODO: See if I want to swap the buffer like this or in window class
+                //Swap buffers
+                glfwSwapBuffers(window.m_window);
+            }
+
+            
+            glfwPollEvents();
+        }
 
     }
     

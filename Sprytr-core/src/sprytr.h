@@ -12,6 +12,7 @@ namespace sprytr
     private:
         //Windows
         std::vector<graphics::Window> m_windows;
+        //TODO: See if I can remove m_current_window
         int m_current_window;
 
         //Input handler
@@ -28,12 +29,12 @@ namespace sprytr
         bool curr_window_should_close() const;
         bool any_window_should_close() const;
         bool all_windows_should_close() const;
-        void clear_curr_window(float red, float green, float blue, float alpha) const;
+        void set_clear_color(int window_id, float red, float green, float blue, float alpha);
         void update_windows();
 
         //Sprytr specific functions
         void start();
-        void virtual on_update();
+        void virtual on_update(double delta_time);
         void virtual on_create();
     };
 }

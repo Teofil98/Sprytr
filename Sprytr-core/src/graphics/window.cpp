@@ -54,7 +54,7 @@ namespace sprytr {
 
         void Window::update() const
         {
-            make_current();
+            //make_current();
             glfwSwapBuffers(m_window);
         }
 
@@ -63,18 +63,24 @@ namespace sprytr {
             glfwGetFramebufferSize(m_window, &width, &height);
         }
 
+
         void Window::make_current() const
         {
             glfwMakeContextCurrent(m_window);
         }
 
-        void Window::set_clear_color(float red, float green, float blue, float alpha) const
+        void Window::set_clear_color(float red, float green, float blue, float alpha)
         {
-            glClearColor(red, green, blue, alpha);
+            //glClearColor(red, green, blue, alpha);
+            m_clear_color.red = red;
+            m_clear_color.green = green;
+            m_clear_color.blue = blue;
+            m_clear_color.alpha = alpha;
         }
 
         void Window::clear() const
         {
+            glClearColor(m_clear_color.red, m_clear_color.green, m_clear_color.blue, m_clear_color.alpha);
             glClear(GL_COLOR_BUFFER_BIT);
         }
     }
