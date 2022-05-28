@@ -128,7 +128,13 @@ namespace sprytr
             last_time = current_time;
 
             //TODO: See how to handle the main render loop
+            m_input_handler.update_keys();
+
+            m_keys = input::InputHandler::keys;
+
             on_update(delta_time);
+
+           
 
             for (auto& window : m_windows)
             {

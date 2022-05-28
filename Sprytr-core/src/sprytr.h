@@ -18,6 +18,9 @@ namespace sprytr
         //Input handler
         input::InputHandler& m_input_handler = input::InputHandler::get_instance();
 
+    protected:
+        input::sprytr_key* m_keys;
+
     public:
         Sprytr();
         ~Sprytr();

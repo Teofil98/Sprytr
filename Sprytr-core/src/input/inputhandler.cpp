@@ -1,5 +1,5 @@
 #include "inputhandler.h"
-
+#include "../misc/logging.h"
 
 namespace sprytr
 {
@@ -37,15 +37,15 @@ namespace sprytr
             {
                 if (key_state[i] != old_key_state[i])
                 {
-                    //key pressed
                     if (key_state[i])
                     {
+                        //key pressed
                         InputHandler::keys[i].pressed = true;
                         InputHandler::keys[i].held = true;
                         InputHandler::keys[i].released = false;
                     }
                     else {
-                        //key relseased
+                        //key released
                         InputHandler::keys[i].pressed = false;
                         InputHandler::keys[i].held = false;
                         InputHandler::keys[i].released = true;
@@ -64,6 +64,7 @@ namespace sprytr
                         InputHandler::keys[i].released = false;
                     }
                 }
+                
             }
         }
 
